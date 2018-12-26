@@ -38,3 +38,24 @@ end
 # => VAR = v としている所で dynamic constant assignment
 # メソッド内の定数の更新は文法エラーになる
 
+# 可変長引数
+def hoge *args
+  p *args
+end
+
+hoge [1, 2, 3]
+# => [1, 2, 3]
+
+def fuga *args
+  p args[0]
+end
+
+fuga [1, 2, 3]
+# => [1, 2, 3]
+
+def foo *args
+  p args
+end
+
+foo [1, 2, 3]
+# => [[1, 2, 3]]
