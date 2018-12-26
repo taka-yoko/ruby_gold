@@ -19,3 +19,22 @@ end
 p M::C.new.awesome_method
 # => `awesome_method': uninitialized constant M::C::CONST (NameError)
 #####
+
+# 整数、少数の演算
+p 4/5
+# => 0
+p 4.0/5
+# => 0.8
+p 4/5r
+# => (4/5)
+
+# メソッド内での定数の更新
+class C
+  VAR = 0
+  def VAR= v
+    VAR = v
+  end
+end
+# => VAR = v としている所で dynamic constant assignment
+# メソッド内の定数の更新は文法エラーになる
+
