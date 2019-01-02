@@ -59,3 +59,43 @@ end
 
 foo [1, 2, 3]
 # => [[1, 2, 3]]
+
+
+# https://docs.ruby-lang.org/ja/latest/method/Module/i/class_eval.html
+# Module#class_evalは、引数に文字列またはブロックを受け取る
+
+# 引数が文字列の場合は、定数とクラス変数のスコープは、自身のモジュール定義式
+# 内と同じスコープになる
+
+class C1
+  X = 'X'
+  @@c_var = 'c_var'
+end
+
+C1.class_eval(<<-CODE)
+  def foo
+    p X
+    p @@c_var
+  end
+CODE
+
+C1.new.foo
+# => "X"
+"c_var"
+
+# 引数がブロックの場合は、定数とクラス変数のスコープはブロックの外側のスコープになる
+
+class C2
+  X = 'X'
+  @@c_var = 'c_var'
+end
+
+X = 'global X'
+C2.class_eval do
+  def foo
+    p X
+  end
+end
+
+C2.new.foo
+# => "global X"
