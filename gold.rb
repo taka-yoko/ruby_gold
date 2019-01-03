@@ -99,3 +99,41 @@ end
 
 C2.new.foo
 # => "global X"
+
+# 例外処理
+
+begin
+  # 何らかの処理
+begin
+rescue
+  # 例外が発生したら
+else
+  # 例外がなかったら
+ensure
+  # 例外があってもなくても
+end
+
+# ex.
+begin
+  1/1
+rescue StandardError => e
+  p e
+else
+  p "else"
+ensure
+  p "ensure"
+end
+# => "else"
+# => "ensure"
+
+begin
+  1/0
+rescue StandardError => e
+  p e
+else
+  p "else"
+ensure
+  p "ensure"
+end
+# => #<ZeroDivisionError: divided by 0>
+# => "ensure"
