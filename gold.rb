@@ -137,3 +137,35 @@ ensure
 end
 # => #<ZeroDivisionError: divided by 0>
 # => "ensure"
+  
+  
+# class, moduleの探索順序
+  
+## 後でprependした方が先に探索される
+module M1
+end
+
+module M2
+end
+
+class C
+  prepend M1
+  prepend M2
+end
+
+p C.ancestors
+# => [M2, M1, C, Object, Kernel, BasicObject]
+  
+## prependで複数のmoduleを引数にした場合は、前の引数から探索される
+module M1
+end
+
+module M2
+end
+
+class C
+  prepend M1, M2
+end
+
+p C.ancestors
+# => [M1, M2, C, Object, Kernel, BasicObject]
